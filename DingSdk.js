@@ -1,6 +1,9 @@
 const axios = require('axios')
 const {webhook} = require('./webhook.js')
 module.exports = {
+  dingSend(json){
+    axios.post(webhook, json).then(ret => console.log(ret.data))
+  },
     dingText(content, isAtAll = false) {
         axios.post(webhook, {
             'msgtype': 'text',
@@ -10,6 +13,8 @@ module.exports = {
             'at': {
                 'isAtAll': isAtAll
             }
+        }).then(ret => {
+          console.log(ret.data)
         })
     },
     dingLink(title, content, messageUrl, picUrl = '') {
